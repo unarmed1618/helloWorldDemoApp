@@ -39,14 +39,17 @@ block content
   .form-group
     label.col-xs-2.col-sm-2.control-label(for='city') City
     .col-sm-3.col-xs-3
-     input.form-control(name='user[city]',id='city',required)
+     input.form-control(name='user[city]', id='city', required)
   .form-group
     label.col-xs-2.col-sm-2.control-label(for='state') State
     .col-sm-3.col-xs-3
      input.form-control(name='user[state]',id='state',required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='country') Country
+    label.col-xs-2.col-sm-2.control-label Country (US Only)
     .col-sm-3.col-xs-3
-     input.form-control(name='user[country]',id='country', required)
-  input(type="hidden", name="user[joinDate]",value=Date.now())
-  input(type="submit")
+     p.form-control-static US
+    input(type="hidden",name='user[country]',id='country', value="US")
+    input(type="hidden", name="user[joinDate]",value=Date.now())
+  .form-group
+    .col-sm-5.col-xs-5
+     input.form-control(type="submit")
