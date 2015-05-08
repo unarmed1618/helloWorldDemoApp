@@ -8,8 +8,9 @@ var jade = require("jade");
 var jadeOptions = {filename: './', pretty: true };
 var User, db;
 var app = express();
-//This can be used to prevent users from getting to 
-// things they aren't supposed to.
+/*This can be used to prevent users from getting to 
+ * things they aren't supposed to. 
+*/
 var pages = ["register","verify","admin"];
 console.log("Finished initialization");
 function renderJadeFile(template, options) {
