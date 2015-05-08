@@ -18,16 +18,16 @@ function renderJadeFile(template, options) {
     return fn(options.locals);
 }
 var dbstr = "mongodb://helloworld:1insecuretest@ds061188.mongolab.com:61188/heroku_app36645575"
-
+app.set('db-uri',dbstr);
 app.set('views', __dirname + '/pages');
 app.use(bodyparser.json());
 app.use(express.static(__dirname + '/static'));
-/*
+
 models.defineModels(mongoose, function() {
     app.User = User = mongoose.model('User');
     db = mongoose.connect(app.set('db-uri'));
 });
-*/
+
 app.get('/app/:dest',function(req,res){
 if(pages.indexOf(req.params.dest) != -1)
     res.render(req.params.dest + '.jade');
