@@ -7,10 +7,7 @@ var mongoose = require("mongoose");
 var jade = require("jade");
 var jadeOptions = {filename: './', pretty: true };
 var User, db;
-var app = express();
-/*This can be used to prevent users from getting to 
- * things they aren't supposed to. 
-*/
+var app = express(); 
 var pages = ["register","confirm","admin"];
 console.log("Finished initialization");
 function renderJadeFile(template, options) {
@@ -36,20 +33,22 @@ app.get('/app/:dest',function(req,res){
 		if(users) res.render('admin.jade',{'users':users});
 		else      res.render('admin.jade');
 	    });
-    else
-	res.render(req.params.dest + '.jade');
+        else if(req.params.dest == 'confirm')
+	    User.findOne({'_id':req.query.id},function(err,user){
+		if(user) res.render('confirm.jade',{'user':user});
+		else res.redirect('/app/register');
+	    });
+        else
+	    res.render(req.params.dest + '.jade');
     else
 	res.redirect('/404.html')
 });
 app.post('/register',function(req,res){
-var rp = req.body;
-console.log(rp);
-console.log(rp.user);
     var newUser = new User(req.body.user);
     //Do some validations
     newUser.save();
     //req.set({'validations' : 'someValidations'});
-    res.redirect('/app/confirm');
+    res.redirect('/app/confirm?id='+newUser.id);
 });
 app.get('/', function(req,res){
     res.redirect('/app/register');

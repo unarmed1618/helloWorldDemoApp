@@ -1,5 +1,43 @@
 extends shared/theme
 append head
  title Verification
+block pageSpecNav
+ p.navbar-text Verifying this Human has been catalogued.
 block content
- p this page will make certain that the data the user wrote was the right dat 
+ form(method="get",action="/register",role="confirmation").form-horizontal
+  .form-group
+    label.col-xs-2.col-sm-2.control-label First Name
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.firstName
+  .form-group
+    label.col-xs-2.col-sm-2.control-label Last Name
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.lastName
+  .form-group
+    label.col-xs-2.col-sm-2.control-label Address 1
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.address1
+  .form-group
+    label.col-xs-2.col-sm-2.control-label Address 2
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.address2
+  .form-group
+    label.col-xs-2.col-sm-2.control-label Zip
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.zip
+  .form-group
+    label.col-xs-2.col-sm-2.control-label City
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.city
+  .form-group
+    label.col-xs-2.col-sm-2.control-label State
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.state
+  .form-group
+    label.col-xs-2.col-sm-2.control-label Country
+    .col-sm-3.col-xs-3
+     p.form-control-static= user.country
+  .form-group 
+    label.col-xs-2.col-sm-2.control-label Add
+    .col-sm-3.col-xs-3
+     a.form-link(href="/app/register") Another
