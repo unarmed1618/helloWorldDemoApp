@@ -17,39 +17,39 @@ block pageSpecNav
 block content
  form(method="post",action="/register",role="form").form-horizontal
   .form-group    
-    label.col-xs-2.col-sm-2.control-label(for='first') First Name
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='first') First Name
+    .col-sm-3.col-xs-6
      input.form-control(name='user[firstName]',id='first',required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='last') Last Name
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='last') Last Name
+    .col-sm-3.col-xs-6
      input.form-control(name='user[lastName]',id='last', required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='address1') Address 1
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='address1') Address 1
+    .col-sm-3.col-xs-6
      input.form-control(name='user[address1]',id='address1',required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='address2') Address 2
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='address2') Address 2
+    .col-sm-3.col-xs-6
      input.form-control(name='user[address2]',id='address2')
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='zip') Zip
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='zip') Zip
+    .col-sm-3.col-xs-6
      input.form-control(name='user[zip]',id='zip',required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='city') City
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='city') City
+    .col-sm-3.col-xs-6
      input.form-control(name='user[city]', id='city', required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label(for='state') State
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label(for='state') State
+    .col-sm-3.col-xs-6
      input.form-control(name='user[state]',id='state',required)
   .form-group
-    label.col-xs-2.col-sm-2.control-label Country (US Only)
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-2.control-label Country (US Only)
+    .col-sm-3.col-xs-6
      p.form-control-static US
     input(type="hidden",name='user[country]',id='country', value="US")
     input(type="hidden", name="user[joinDate]",value=Date.now())
   .form-group
-    .col-sm-5.col-xs-5
+    .col-sm-5.col-xs-6.col-xs-offset-4
      input.form-control(type="submit")
