@@ -4,5 +4,29 @@ append head
 block pageSpecNav
  p.navbar-text List of Humans
 block content
- p. 
-  This page will contain all of the users that have been created in a pretty table. 
+ h3 Some Humans:
+ table.table.table-striped
+  tr
+   th 
+   th First Name
+   th Last Name
+   th Address 1
+   th Address 2
+   th City
+   th State
+   th Zip
+   th Country
+   th Join Date
+  each user,i in users
+   tr
+    td=(i+1)
+    td=user.firstName
+    td=user.lastName
+    td=user.address1
+    td=user.address2
+    td=user.city
+    td=user.state
+    td=user.zip
+    td=user.country
+    td=user.joinDate
+  //for each user in users Table, make a row.
