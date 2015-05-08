@@ -13,7 +13,8 @@ function defineModels(mongoose, fn) {
 	'city' : String,
 	'state' : String,
 	'zip' : String,
-	'country' : String
+	'country' : String,
+	'joinDate' : Date
     });
     User.virtual('id')
 	.get(function() {

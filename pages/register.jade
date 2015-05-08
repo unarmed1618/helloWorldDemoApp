@@ -1,7 +1,51 @@
 extends shared/theme
 append head
  title Register
+ script(type="text/javascript").
+  function validateZip(e) {
+   var client = new XMLHttpRequest();
+   client.open("GET", "http://api.zippopotam.us/us/"+e.value, true);
+   client.onreadystatechange = function() {
+    if(client.readyState == 4) {
+     alert(client.responseText);
+    };
+   };
+   client.send();
+   }
+block pageSpecNav
+ p.navbar-text Register for our list of humans.
 block content
- form
-  input
-  label steaks
+ form(method="post",action="/register",role="form").form-horizontal
+  .form-group    
+    label.col-xs-2.col-sm-2.control-label(for='first') First Name
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[firstName]',id='first',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='last') Last Name
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[lastName]',id='last', required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='address1') Address 1
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[address1]',id='address1',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='address2') Address 2
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[address2]',id='address2',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='zip') Zip
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[zip]',id='zip',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='city') City
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[city]',id='city',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='state') State
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[state]',id='state',required)
+  .form-group
+    label.col-xs-2.col-sm-2.control-label(for='country') Country
+    .col-sm-3.col-xs-3
+     input.form-control(name='user[country]',id='country', required)
+  input(type="hidden", name="user[joinDate]",value=Date.now())
