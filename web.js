@@ -1,8 +1,9 @@
-//Web.js -- Program entrypoint
+//Web.js -- Program entOArypoint
 var express = require("express");
 var logfmt = require("logfmt");
+var bodyparser = require("body-parser");
 var models = require("./models");
-var mongoose = require("connect-mongodb");
+var mongoose = require("mongoose");
 var jade = require("jade");
 var jadeOptions = {filename: './', pretty: true };
 var User, db;
@@ -15,14 +16,11 @@ function renderJadeFile(template, options) {
     return fn(options.locals);
 }
 var dbstr = ""
-app.configure('development',function() {
-    app.use(express.errorHandler({ dumpExceptions: true }));
-});
-app.configure(function() {
-    app.set('views', __dirname + '/pages');
-    app.use(express.bodyParser());
-    app.use(express.static(__dirname + '/public'));
-});
+
+app.set('views', __dirname + '/pages');
+app.use(bodyparser.json());
+app.use(express.static(__dirname + '/public'));
+
 models.defineModels(mongoose, function() {
     app.User = User = mongoose.model('User');
     db = mongoose.connect(app.set('db-uri'));
