@@ -1,0 +1,19 @@
+{
+  "name": "helloWorldDemoApp",
+  "version": "0.0.0",
+  "description": "An application to demonstrate my abilities as a software engineer",
+  "main": "web.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/unarmed1618/helloWorldDemoApp.git"
+  },
+  "author": "Emily Jade Darrow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/unarmed1618/helloWorldDemoApp/issues"
+  },
+  "homepage": "https://github.com/unarmed1618/helloWorldDemoApp"
+}
