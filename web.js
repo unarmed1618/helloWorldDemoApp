@@ -15,7 +15,7 @@ function renderJadeFile(template, options) {
     var fn = jade.compile(template, options);
     return fn(options.locals);
 }
-var dbstr = ""
+var dbstr = "mongodb://heroku_app36645575:1insecuretest@ds061188.mongolab.com:61188/heroku_app36645575"
 
 app.set('views', __dirname + '/pages');
 app.use(bodyparser.json());
