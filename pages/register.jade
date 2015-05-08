@@ -2,48 +2,64 @@ extends shared/theme
 append head
  title Register
  script(type="text/javascript").
-  function validateZip(e) {
-   var client = new XMLHttpRequest();
-   client.open("GET", "http://api.zippopotam.us/us/"+e.value, true);
-   client.onreadystatechange = function() {
-    if(client.readyState == 4) {
-     alert(client.responseText);
-    };
-   };
-   client.send();
-   }
+    function validate(e) {
+    var req = 0;
+    var pat = 0;
+    if(e.required) {
+     if(e.value.length > 0) req = 1;
+     else  req = 0;
+    }
+    else  req = 1;
+     if(e.pattern) {
+      var pattern = new RegExp(e.pattern,"i");
+     if(pattern.test(e.value)) pat = 1;
+     else pat = 0;
+    }
+    else pat = 1;
+    if(pat * req ==1)
+      e.parentElement.parentElement.className = "form-group has-success"
+    else
+      e.parentElement.parentElement.className = "form-group has-error"
+    validateAll();
+    }
+    function validateAll(){
+      $("#submitter").attr("disabled",false);
+      $("[required]").each(function(){ if(!$(this).parent().parent().hasClass("has-success")) $("#submitter").attr("disabled",true) });; 
+            
+    }
 block pageSpecNav
  p.navbar-text Register for our list of humans.
 block content
- form(method="post",action="/register",role="form").form-horizontal
-  .form-group    
-    label.col-xs-6.col-sm-2.control-label(for='first') First Name
+ form(method="post",action="/register",role="form",onchange='validateAll()').form-horizontal
+  .form-group#gfirst   
+    label.col-xs-6.col-sm-2.control-label(for='first') *First Name
     .col-sm-3.col-xs-6
-     input.form-control(name='user[firstName]',id='first',required)
-  .form-group
-    label.col-xs-6.col-sm-2.control-label(for='last') Last Name
+     input.form-control(name='user[firstName]',id='first',required, pattern="[a-z]+",onInput="validate(this)")
+  .form-group#glast
+    label.col-xs-6.col-sm-2.control-label(for='last') *Last Name
     .col-sm-3.col-xs-6
-     input.form-control(name='user[lastName]',id='last', required)
-  .form-group
-    label.col-xs-6.col-sm-2.control-label(for='address1') Address 1
+     input.form-control(name='user[lastName]',id='last', required,pattern="[a-z]+",onInput="validate(this)")
+  .form-group#gaddr1
+    label.col-xs-6.col-sm-2.control-label(for='address1') *Address 1
     .col-sm-3.col-xs-6
-     input.form-control(name='user[address1]',id='address1',required)
-  .form-group
+     input.form-control(name='user[address1]',id='address1',required, pattern="[a-z]+",onInput="validate(this)")
+  .form-group#gaddr2
     label.col-xs-6.col-sm-2.control-label(for='address2') Address 2
     .col-sm-3.col-xs-6
-     input.form-control(name='user[address2]',id='address2')
-  .form-group
-    label.col-xs-6.col-sm-2.control-label(for='zip') Zip
+     input.form-control(name='user[address2]',id='address2',onInput="validate(this)")
+  .form-group#gzip
+    label.col-xs-6.col-sm-2.control-label(for='zip') *Zip
     .col-sm-3.col-xs-6
-     input.form-control(name='user[zip]',id='zip',required)
-  .form-group
-    label.col-xs-6.col-sm-2.control-label(for='city') City
+     input.form-control(name='user[zip]',id='zip',required,pattern= "([0-9]{5}|[0-9]{9})",onInput="validate(this)")
+  .form-group#gcity
+    label.col-xs-6.col-sm-2.control-label(for='city') *City
     .col-sm-3.col-xs-6
-     input.form-control(name='user[city]', id='city', required)
-  .form-group
-    label.col-xs-6.col-sm-2.control-label(for='state') State
+     input.form-control(name='user[city]', id='city', required, pattern= "[a-z]+",onInput="validate(this)")
+  .form-group#gstate
+    label.col-xs-6.col-sm-2.control-label(for='state') *State (Abbreviation)
     .col-sm-3.col-xs-6
-     input.form-control(name='user[state]',id='state',required)
+     input.form-control(name='user[state]',id='state',required,pattern= "(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|AS|DC|FM|GU|MH|MP|PW|PR|VI)",onInput="validate(this)")
+     //use option with 50 states
   .form-group
     label.col-xs-6.col-sm-2.control-label Country (US Only)
     .col-sm-3.col-xs-6
@@ -52,4 +68,4 @@ block content
     input(type="hidden", name="user[joinDate]",value=Date.now())
   .form-group
     .col-sm-5.col-xs-6.col-xs-offset-4
-     input.form-control(type="submit")
+     input.form-control(type="submit",disabled,id="submitter")
