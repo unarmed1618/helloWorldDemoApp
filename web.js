@@ -29,7 +29,7 @@ models.defineModels(mongoose, function() {
 app.get('/app/:dest',function(req,res){
     if(pages.indexOf(req.params.dest) != -1)
 	if(req.params.dest == 'admin')
-	    User.find({}, function(err,users){
+	    User.find({},null,{sort:"-joinDate"}, function(err,users){
 		if(users) res.render('admin.jade',{'users':users});
 		else      res.render('admin.jade');
 	    });
@@ -38,17 +38,26 @@ app.get('/app/:dest',function(req,res){
 		if(user) res.render('confirm.jade',{'user':user});
 		else res.redirect('/app/register');
 	    });
-        else
-	    res.render(req.params.dest + '.jade');
-    else
-	res.redirect('/404.html')
+        else if(req.params.dest == 'register')
+	    if(req.query.message){
+		res.render('register.jade',{'message':req.query.message});
+	    }  else
+		res.render('register.jade');
+    else 
+	res.render(req.params.dest + '.jade');
+     else
+	res.redirect('/404.html');
 });
 app.post('/register',function(req,res){
     var newUser = new User(req.body.user);
-    //Do some validations
-    newUser.save();
-    //req.set({'validations' : 'someValidations'});
-    res.redirect('/app/confirm?id='+newUser.id);
+    newUser.validate(function (err) {
+	if(err) 
+	    res.redirect('/app/register?message='+String(err));
+	else {
+	    newUser.save();  
+	res.redirect('/app/confirm?id='+newUser.id);
+	}
+    });
 });
 app.get('/', function(req,res){
     res.redirect('/app/register');

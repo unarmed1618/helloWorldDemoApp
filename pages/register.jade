@@ -11,7 +11,7 @@ append head
     }
     else  req = 1;
      if(e.pattern) {
-      var pattern = new RegExp(e.pattern,"i");
+      var pattern = new RegExp(e.pattern,e.modifier);
      if(pattern.test(e.value)) pat = 1;
      else pat = 0;
     }
@@ -22,27 +22,32 @@ append head
       e.parentElement.parentElement.className = "form-group has-error"
     validateAll();
     }
+     //Disable the following function and remove the 'disabled' attribute from the submit button to test backend validations
     function validateAll(){
-      $("#submitter").attr("disabled",false);
-      $("[required]").each(function(){ if(!$(this).parent().parent().hasClass("has-success")) $("#submitter").attr("disabled",true) });; 
+        $("#submitter").attr("disabled",false);
+       $("[required]").each(function(){ if(!$(this).parent().parent().hasClass("has-success")) $("#submitter").attr("disabled",true) });; 
             
-    }
+     }
 block pageSpecNav
  p.navbar-text Register for our list of humans.
 block content
+ if(message) 
+  .alert.alert-danger(role="alert")
+   strong Warning!
+   p=message
  form(method="post",action="/register",role="form",onchange='validateAll()').form-horizontal
   .form-group#gfirst   
     label.col-xs-6.col-sm-2.control-label(for='first') *First Name
     .col-sm-3.col-xs-6
-     input.form-control(name='user[firstName]',id='first',required, pattern="[a-z]+",onInput="validate(this)")
+     input.form-control(name='user[firstName]',id='first',required, pattern="[a-z]+",onInput="validate(this)",modifier="i")
   .form-group#glast
     label.col-xs-6.col-sm-2.control-label(for='last') *Last Name
     .col-sm-3.col-xs-6
-     input.form-control(name='user[lastName]',id='last', required,pattern="[a-z]+",onInput="validate(this)")
+     input.form-control(name='user[lastName]',id='last', required,pattern="[a-z]+",onInput="validate(this)",modifier="i")
   .form-group#gaddr1
     label.col-xs-6.col-sm-2.control-label(for='address1') *Address 1
     .col-sm-3.col-xs-6
-     input.form-control(name='user[address1]',id='address1',required, pattern="[a-z]+",onInput="validate(this)")
+     input.form-control(name='user[address1]',id='address1',required, pattern="[a-z]+",onInput="validate(this)",modifier="i")
   .form-group#gaddr2
     label.col-xs-6.col-sm-2.control-label(for='address2') Address 2
     .col-sm-3.col-xs-6
@@ -50,15 +55,15 @@ block content
   .form-group#gzip
     label.col-xs-6.col-sm-2.control-label(for='zip') *Zip
     .col-sm-3.col-xs-6
-     input.form-control(name='user[zip]',id='zip',required,pattern= "([0-9]{5}|[0-9]{9})",onInput="validate(this)")
+     input.form-control(name='user[zip]',id='zip',required,pattern= "^[0-9]{5}(?:-[0-9]{4})?$",onInput="validate(this)",modifier="g")
   .form-group#gcity
     label.col-xs-6.col-sm-2.control-label(for='city') *City
     .col-sm-3.col-xs-6
-     input.form-control(name='user[city]', id='city', required, pattern= "[a-z]+",onInput="validate(this)")
+     input.form-control(name='user[city]', id='city', required, pattern= "[a-z]+",onInput="validate(this)",modifier="i")
   .form-group#gstate
     label.col-xs-6.col-sm-2.control-label(for='state') *State (Abbreviation)
     .col-sm-3.col-xs-6
-     input.form-control(name='user[state]',id='state',required,pattern= "(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|AS|DC|FM|GU|MH|MP|PW|PR|VI)",onInput="validate(this)")
+     input.form-control(name='user[state]',id='state',required,pattern= "(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|AS|DC|FM|GU|MH|MP|PW|PR|VI)",onInput="validate(this)",modifier="i")
      //use option with 50 states
   .form-group
     label.col-xs-6.col-sm-2.control-label Country (US Only)
