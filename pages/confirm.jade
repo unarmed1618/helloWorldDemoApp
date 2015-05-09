@@ -4,40 +4,41 @@ append head
 block pageSpecNav
  p.navbar-text Verifying this Human has been catalogued.
 block content
- form(method="get",action="/register",role="confirmation").form-horizontal
+ form(method="get",role="confirmation").form-horizontal
   .form-group
-    label.col-xs-2.col-sm-2.control-label First Name
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label First Name:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.firstName
   .form-group
-    label.col-xs-2.col-sm-2.control-label Last Name
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label Last Name:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.lastName
   .form-group
-    label.col-xs-2.col-sm-2.control-label Address 1
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label Address 1:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.address1
   .form-group
-    label.col-xs-2.col-sm-2.control-label Address 2
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label Address 2:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.address2
   .form-group
-    label.col-xs-2.col-sm-2.control-label Zip
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label Zip:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.zip
   .form-group
-    label.col-xs-2.col-sm-2.control-label City
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label City:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.city
   .form-group
-    label.col-xs-2.col-sm-2.control-label State
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label State:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.state
   .form-group
-    label.col-xs-2.col-sm-2.control-label Country
-    .col-sm-3.col-xs-3
+    label.col-xs-6.col-sm-4.control-label Country:
+    .col-sm-3.col-xs-6
      p.form-control-static= user.country
   .form-group 
-    label.col-xs-2.col-sm-2.control-label Add
-    .col-sm-3.col-xs-3
-     a.form-link(href="/app/register") Another
+    .col-sm-3.col-xs-3.col-xs-offset-3.col-sm-offset-2
+     a.btn.btn-default(href="/app/register") Add Another
+    //.col-sm-1.col-xs-1
+     a.btn.btn-default(href="/app/admin") Admin Console
